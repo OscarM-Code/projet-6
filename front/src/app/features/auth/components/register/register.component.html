@@ -1,0 +1,23 @@
+<div class="register" fxLayout="row" fxLayoutAlign="center center">
+    <form class="register-form" (ngSubmit)="submit()">
+        <h2>Inscription</h2>
+
+        <div class="form-group">
+            <label for="username">Nom d'utilisateur</label>
+            <input id="username" formControlName="username">
+        </div>
+
+        <div class="form-group">
+            <label for="email">Email</label>
+            <input id="email" formControlName="email">
+        </div>
+
+        <div class="form-group">
+            <label for="password">Mot de passe</label>
+            <input id="password" formControlName="password">
+        </div>
+
+        <button mat-raised-button color="primary" type="submit" [disabled]="form.invalid">Submit</button>
+        <span *ngIf="onError" class="error ml2">Une erreur est survenue</span>
+    </form>
+</div>
