@@ -26,11 +26,6 @@ public class Commentary {
   private Long id;
 
   @NonNull
-  @Size(max = 50)
-  @Column(name = "title")
-  private String title;
-
-  @NonNull
   @Size(max = 1000)
   @Column(name = "content")
   private String content;

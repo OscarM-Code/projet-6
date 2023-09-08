@@ -33,14 +33,14 @@ public class JwtUtils {
     calendar.add(Calendar.DATE, 1);
 
     return Jwts.builder()
-        .setSubject(userPrincipal.getUsername())
+        .setSubject(userPrincipal.getEmail())
         .setIssuedAt(new Date(currentTimeMillis))
         .setExpiration(calendar.getTime())
         .signWith(SignatureAlgorithm.HS512, jwtSecret)
         .compact();
   }
 
-  public String getUserNameFromJwtToken(String token) {
+  public String getUserMailFromJwtToken(String token) {
     return Jwts.parser().setSigningKey(jwtSecret).parseClaimsJws(token).getBody().getSubject();
   }
 

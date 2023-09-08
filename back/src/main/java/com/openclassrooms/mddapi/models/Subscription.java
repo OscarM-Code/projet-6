@@ -1,25 +1,33 @@
 package com.openclassrooms.mddapi.models;
 
-import lombok.Data;
-import lombok.EqualsAndHashCode;
+import lombok.*;
+import lombok.experimental.Accessors;
 
-import javax.persistence.Entity;
-import javax.persistence.JoinColumn;
-import javax.persistence.ManyToOne;
-import javax.persistence.Table;
-import java.io.Serializable;
+import javax.persistence.*;
+
+import com.openclassrooms.mddapi.models.special.SubscriptionId;
 
 @Entity
 @Table(name = "SUBSCRIPTIONS")
 @Data
-@EqualsAndHashCode(of = { "user", "theme" })
-public class Subscription implements Serializable {
-  @ManyToOne
-  @JoinColumn(name = "user_id")
-  private User user;
+@Accessors(chain = true)
+@NoArgsConstructor
+@ToString
+@IdClass(SubscriptionId.class)
+public class Subscription {
 
-  @ManyToOne
-  @JoinColumn(name = "theme_id")
-  private Theme theme;
+  @NonNull
+  @Id
+  @Column(name = "user_id")
+  private Long userId;
 
+  @NonNull
+  @Id
+  @Column(name = "theme_id")
+  private Long themeId;
+
+  public Subscription(Long userId, Long themeId) {
+    this.userId = userId;
+    this.themeId = themeId;
+  }
 }

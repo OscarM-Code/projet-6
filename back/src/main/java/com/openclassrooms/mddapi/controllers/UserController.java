@@ -2,11 +2,11 @@ package com.openclassrooms.mddapi.controllers;
 
 import com.openclassrooms.mddapi.mapper.UserMapper;
 import com.openclassrooms.mddapi.models.User;
+import com.openclassrooms.mddapi.security.services.UserDetailsImpl;
 import com.openclassrooms.mddapi.services.UserService;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.security.core.context.SecurityContextHolder;
-import org.springframework.security.core.userdetails.UserDetails;
 import org.springframework.web.bind.annotation.*;
 
 import java.util.Objects;
@@ -39,7 +39,7 @@ public class UserController {
         }
     }
 
-    @DeleteMapping("{id}")
+    @DeleteMapping("/{id}")
     public ResponseEntity<?> save(@PathVariable("id") String id) {
         try {
             User user = this.userService.findById(Long.valueOf(id));
@@ -48,10 +48,10 @@ public class UserController {
                 return ResponseEntity.notFound().build();
             }
 
-            UserDetails userDetails = (UserDetails) SecurityContextHolder.getContext().getAuthentication()
+            UserDetailsImpl userDetails = (UserDetailsImpl) SecurityContextHolder.getContext().getAuthentication()
                     .getPrincipal();
 
-            if (!Objects.equals(userDetails.getUsername(), user.getEmail())) {
+            if (!Objects.equals(userDetails.getEmail(), user.getEmail())) {
                 return ResponseEntity.status(HttpStatus.UNAUTHORIZED).build();
             }
 

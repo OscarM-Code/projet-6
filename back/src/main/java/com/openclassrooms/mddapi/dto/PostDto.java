@@ -20,9 +20,6 @@ public class PostDto {
     private String content;
 
     @NotNull
-    private Long userId;
-
-    @NotNull
     private Long themeId;
 
     private LocalDateTime createdAt;
