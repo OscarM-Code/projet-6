@@ -1,5 +1,10 @@
 import { Component } from '@angular/core';
-import { FormBuilder, Validators } from '@angular/forms';
+import {
+  AbstractControl,
+  FormBuilder,
+  ValidatorFn,
+  Validators,
+} from '@angular/forms';
 import { Router } from '@angular/router';
 import { AuthService } from '../../services/auth.service';
 import { RegisterRequest } from '../../interfaces/registerRequest.interface';
@@ -20,7 +25,7 @@ export class RegisterComponent {
     ],
     password: [
       '',
-      [Validators.required, Validators.min(3), Validators.max(40)],
+      [Validators.required, Validators.minLength(8), this.passwordValidator()],
     ],
   });
 
@@ -36,5 +41,33 @@ export class RegisterComponent {
       next: (_: void) => this.router.navigate(['/login']),
       error: (_) => (this.onError = true),
     });
+  }
+
+  passwordValidator(): ValidatorFn {
+    return (control: AbstractControl): { [key: string]: boolean } | null => {
+      const value = control.value as string;
+
+      if (!value) {
+        return null;
+      }
+
+      const hasUpperCase = /[A-Z]/.test(value);
+      const hasLowerCase = /[a-z]/.test(value);
+      const hasDigit = /[0-9]/.test(value);
+      const hasSpecialChar = /[!@#$%^&*(),.?":{}|<>]/.test(value);
+
+      const isValid =
+        value.length >= 8 &&
+        hasUpperCase &&
+        hasLowerCase &&
+        hasDigit &&
+        hasSpecialChar;
+
+      return isValid ? null : { invalidPassword: true };
+    };
+  }
+
+  routerHome() {
+    this.router.navigateByUrl('/');
   }
 }

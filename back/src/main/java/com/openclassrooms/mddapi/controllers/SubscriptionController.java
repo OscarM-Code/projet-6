@@ -5,6 +5,8 @@ import com.openclassrooms.mddapi.payload.response.MessageResponse;
 import com.openclassrooms.mddapi.services.SubscriptionService;
 import com.openclassrooms.mddapi.services.UserService;
 
+import java.util.List;
+
 import javax.servlet.http.HttpServletRequest;
 
 import org.springframework.beans.factory.annotation.Autowired;
@@ -45,5 +47,12 @@ public class SubscriptionController {
         } catch (Exception e) {
             return ResponseEntity.status(HttpStatus.CONFLICT).body(new MessageResponse(e.getMessage()));
         }
+    }
+
+    @GetMapping("/all")
+    public ResponseEntity<List<Long>> getAllSubscriptions(HttpServletRequest request) {
+        Long userId = userService.getUserIdFromAuth(request);
+        List<Long> subscriptions = subscriptionService.getThemeIdsByUserId(userId);
+        return ResponseEntity.ok(subscriptions);
     }
 }

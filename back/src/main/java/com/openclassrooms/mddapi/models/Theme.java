@@ -28,4 +28,9 @@ public class Theme {
   @Column(name = "name")
   private String name;
 
+  @NonNull
+  @Size(max = 30)
+  @Column(name = "description")
+  private String description;
+
 }

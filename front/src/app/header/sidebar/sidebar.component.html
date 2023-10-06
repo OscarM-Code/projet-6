@@ -1,0 +1,9 @@
+<button class="burger-menu-button" (click)="toggleMenu()">
+    <img src="/assets/icon_burger.png" alt="Burger Menu">
+</button>
+<div class="navbar-menu" [ngClass]="{ 'active': isMenuOpen }">
+    <!-- Ajoutez ici les éléments du menu -->
+    <button (click)="routerHome()">Articles</button>
+    <button (click)="routerTheme()">Themes</button>
+    <button id="img-btn" (click)="routerProfil()"><img src="/assets/icon _user.png" alt="user"></button>
+</div>

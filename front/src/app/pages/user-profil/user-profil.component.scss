@@ -1,0 +1,109 @@
+/* Styles pour la page de profil */
+div {
+    text-align: center;
+    margin: 20px auto;
+    max-width: 400px;
+  }
+  
+  h2 {
+    font-size: 24px;
+    margin-bottom: 20px;
+  }
+  
+  form {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    gap: 10px;
+  }
+  
+  .form-group {
+    width: 100%;
+    text-align: left;
+  }
+  
+  label {
+    font-weight: bold;
+  }
+  
+  input {
+    width: 100%;
+    padding: 10px;
+    margin-top: 5px;
+    border: 1px solid #ccc;
+    border-radius: 5px;
+    height: 2rem;
+  }
+  
+  button[type="submit"] {
+    background-color: #7763C5;
+    color: white;
+    border: none;
+    border-radius: 5px;
+    padding: 10px 15px;
+    cursor: pointer;
+    transition: background-color 0.3s, cursor 0.3s;
+    margin-top: 10px;
+  }
+  
+  button[type="submit"]:hover {
+    background-color: #5d4aac;
+  }
+  
+  button {
+    background-color: #9e0606;
+    color: white;
+    border: none;
+    border-radius: 5px;
+    padding: 10px 15px;
+    cursor: pointer;
+    transition: background-color 0.3s, cursor 0.3s;
+    margin-top: 10px;
+  }
+  
+  button:hover {
+    background-color: #690505;
+  }
+
+  .separation {
+    background: black;
+    height: 3px;
+    width: 70% !important;
+    border-radius: 3px;
+    max-width: 80% !important;
+    padding: 0 !important;
+  }
+  
+  @media only screen and (max-width: 420px) and (orientation: portrait) {
+    div {
+      max-width: 100%; /* La largeur maximale s'ajuste à la largeur de l'écran */
+      padding: 10px; /* Ajoute un peu d'espace autour du contenu */
+    }
+  
+    h2 {
+      font-size: 20px; /* Réduit la taille du titre */
+    }
+  
+    form {
+      gap: 5px; /* Réduit l'espacement entre les éléments du formulaire */
+    }
+  
+    input {
+      padding: 5px 0 5px 0; /* Réduit la hauteur des champs de formulaire */
+      width: 100%;
+    }
+  
+    .form-group {
+      max-width: 100%; /* Limite la largeur du contenu à 100% de la largeur du formulaire */
+      overflow: hidden; /* Masque tout contenu dépassant du formulaire */
+      margin-inline: 0;
+      padding-inline: 0;
+    }
+  
+    button[type="submit"],
+    button {
+      font-size: 16px; /* Réduit la taille de la police des boutons */
+      width: 100%; /* Utilise toute la largeur disponible */
+      margin-top: 5px; /* Ajoute un peu d'espace en haut des boutons */
+    }
+  }

@@ -17,4 +17,7 @@ public class CommentaryDto {
     @NotNull
     private Long postId;
 
+    @NotNull
+    UserDto user;
+
 }

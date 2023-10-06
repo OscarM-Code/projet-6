@@ -1,0 +1,9 @@
+<!-- theme-card.component.html -->
+<div class="theme-card">
+    <h3>{{ themeName }}</h3>
+    <p>{{ themeDescription }}</p>
+
+    <button *ngIf="!isSubscribed && !isProfilePage" (click)="subscribeToTheme()">S'abonner</button>
+    <button *ngIf="isSubscribed && isProfilePage" (click)="unSubscribeFromTheme()">Se désabonner</button>
+    <span *ngIf="isSubscribed && !isProfilePage">Vous êtes déjà abonné(e) à ce thème</span>
+</div>

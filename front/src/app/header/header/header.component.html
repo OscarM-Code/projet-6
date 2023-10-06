@@ -1,0 +1,9 @@
+<nav>
+    <img src="/assets/logo_p6.png" alt="logo" />
+    <div *ngIf="shouldDisplayBtn()">
+        <button (click)="routerHome()">Articles</button>
+        <button (click)="routerTheme()">Themes</button>
+        <button id="img-btn" (click)="routerProfil()"><img src="/assets/icon _user.png" alt="user"></button>
+    </div>
+    <app-sidebar *ngIf="isSidebarVisible"></app-sidebar>
+</nav>

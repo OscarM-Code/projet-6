@@ -1,23 +1,27 @@
-<div class="register" fxLayout="row" fxLayoutAlign="center center">
-    <form class="register-form" (ngSubmit)="submit()">
-        <h2>Inscription</h2>
+<app-header></app-header>
+<div class="conteiner">
+  <div class="top">
+    <button class="back-button" (click)="routerHome()">←</button>
+    <h2>Inscription</h2>
+  </div>
+  <form [formGroup]="form" (ngSubmit)="submit()">
+    <!-- Champs de formulaire avec formControlName -->
+    <div>
+      <label for="email">Email</label>
+      <input type="email" id="email" formControlName="email">
+    </div>
 
-        <div class="form-group">
-            <label for="username">Nom d'utilisateur</label>
-            <input id="username" formControlName="username">
-        </div>
+    <div>
+      <label for="username">Username</label>
+      <input type="text" id="username" formControlName="username">
+    </div>
 
-        <div class="form-group">
-            <label for="email">Email</label>
-            <input id="email" formControlName="email">
-        </div>
+    <div>
+      <label for="password">Password</label>
+      <input type="password" id="password" formControlName="password">
+    </div>
 
-        <div class="form-group">
-            <label for="password">Mot de passe</label>
-            <input id="password" formControlName="password">
-        </div>
-
-        <button mat-raised-button color="primary" type="submit" [disabled]="form.invalid">Submit</button>
-        <span *ngIf="onError" class="error ml2">Une erreur est survenue</span>
-    </form>
+    <!-- Bouton de soumission -->
+    <button type="submit">Submit</button>
+  </form>
 </div>

@@ -1,8 +1,12 @@
 package com.openclassrooms.mddapi.services;
 
 import com.openclassrooms.mddapi.dto.PostDto;
+import com.openclassrooms.mddapi.dto.UserDto;
 import com.openclassrooms.mddapi.models.Post;
+import com.openclassrooms.mddapi.models.User;
 import com.openclassrooms.mddapi.repositories.PostRepository;
+import com.openclassrooms.mddapi.repositories.UserRepository;
+
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
@@ -17,11 +21,14 @@ public class PostService {
 
     private final PostRepository postRepository;
     private final SubscriptionService subscriptionService;
+    private final UserRepository userRepository;
 
     @Autowired
-    public PostService(PostRepository postRepository, SubscriptionService subscriptionService) {
+    public PostService(PostRepository postRepository, SubscriptionService subscriptionService,
+            UserRepository userRepository) {
         this.postRepository = postRepository;
         this.subscriptionService = subscriptionService;
+        this.userRepository = userRepository;
     }
 
     public List<PostDto> getPostsByUserSubscriptions(Long userId) {
@@ -51,11 +58,17 @@ public class PostService {
 
     private PostDto convertToDTO(Post post) {
         PostDto postDTO = new PostDto();
+        User user = userRepository.getReferenceById(post.getUserId());
+        UserDto userDto = new UserDto();
+        userDto.setId(user.getId());
+        userDto.setUsername(user.getUsername());
+        userDto.setEmail(user.getEmail());
         postDTO.setId(post.getId());
         postDTO.setTitle(post.getTitle());
         postDTO.setContent(post.getContent());
         postDTO.setThemeId(post.getThemeId());
         postDTO.setCreatedAt(post.getCreatedAt());
+        postDTO.setUser(userDto);
         return postDTO;
     }
 

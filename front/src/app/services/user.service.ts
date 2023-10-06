@@ -1,22 +1,38 @@
-import { HttpClient } from '@angular/common/http';
 import { Injectable } from '@angular/core';
+import { HttpClient, HttpHeaders } from '@angular/common/http';
 import { Observable } from 'rxjs';
-import { User } from '../interfaces/user.interface';
+import { UserDto } from '../dto/user.dto';
 
 @Injectable({
-  providedIn: 'root'
+  providedIn: 'root',
 })
 export class UserService {
+  private baseUrl = 'http://localhost:8080/api/user';
+  private httpOptions = {
+    headers: new HttpHeaders({
+      'Content-Type': 'application/json',
+      Authorization: `Bearer ${localStorage.getItem('accessToken')}`,
+    }),
+  };
 
-  private pathService = 'api/user';
+  constructor(private http: HttpClient) {}
 
-  constructor(private httpClient: HttpClient) { }
-
-  public getById(id: string): Observable<User> {
-    return this.httpClient.get<User>(`${this.pathService}/${id}`);
+  getUserById(): Observable<UserDto> {
+    return this.http.get<UserDto>(`${this.baseUrl}/me`, this.httpOptions);
   }
 
-  public delete(id: string): Observable<any> {
-    return this.httpClient.delete(`${this.pathService}/${id}`);
+  deleteUser(userId: number): Observable<void> {
+    return this.http.delete<void>(
+      `${this.baseUrl}/${userId}`,
+      this.httpOptions
+    );
+  }
+
+  updateUser(user: UserDto): Observable<void> {
+    return this.http.put<void>(
+      `${this.baseUrl}/update`,
+      user,
+      this.httpOptions
+    );
   }
 }

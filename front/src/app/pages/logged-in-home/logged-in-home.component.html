@@ -1,0 +1,11 @@
+<app-header></app-header>
+<div class="container">
+    <button (click)="goToCreatePage()">Créer un article</button>
+    <div *ngIf="posts.length" class="posts">
+        <div *ngFor="let post of posts" (click)="seeMore(post.id)">
+            <h2>{{ post.title }}</h2>
+            <p>{{ formatDate(post.createdAt) }}</p>
+            <p (click)="seeMore(post.id)">{{ post.content }}</p>
+        </div>
+    </div>
+</div>

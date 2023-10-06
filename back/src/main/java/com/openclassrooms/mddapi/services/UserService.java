@@ -1,9 +1,12 @@
 package com.openclassrooms.mddapi.services;
 
+import com.openclassrooms.mddapi.dto.UserDto;
 import com.openclassrooms.mddapi.models.User;
 import com.openclassrooms.mddapi.repositories.UserRepository;
 import com.openclassrooms.mddapi.security.jwt.AuthTokenFilter;
 import com.openclassrooms.mddapi.security.jwt.JwtUtils;
+
+import java.time.LocalDateTime;
 
 import javax.servlet.http.HttpServletRequest;
 
@@ -49,5 +52,22 @@ public class UserService {
             logger.error("Error while retrieve user from auth", e);
             return null;
         }
+    }
+
+    public User updateUser(Long id, UserDto userDto) {
+        User user = userRepository.findById(id).orElse(null);
+        if (user != null) {
+            if (!user.getEmail().equals(userDto.getEmail())) {
+                user.setEmail(userDto.getEmail());
+            }
+
+            if (!user.getUsername().equals(userDto.getUsername())) {
+                user.setUsername(userDto.getUsername());
+            }
+            user.setUpdatedAt(LocalDateTime.now());
+
+            userRepository.save(user);
+        }
+        return user;
     }
 }

@@ -1,0 +1,11 @@
+<div class="container">
+    <h2 *ngIf="!isProfilePage">Liste des Thèmes</h2>
+    <div>
+        <div *ngFor="let theme of themes"
+            [class]="!isProfilePage || (isProfilePage && isThemeSubscribed(theme.id)) ? 'active' : 'none'">
+            <app-theme-card *ngIf="!isProfilePage || (isProfilePage && isThemeSubscribed(theme.id))"
+                [themeId]="theme.id" [themeName]="theme.name" [themeDescription]="theme.description"
+                [isSubscribed]="isThemeSubscribed(theme.id)" [isProfilePage]="isProfilePage"></app-theme-card>
+        </div>
+    </div>
+</div>

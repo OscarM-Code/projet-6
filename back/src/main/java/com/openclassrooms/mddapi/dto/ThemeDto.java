@@ -13,4 +13,7 @@ public class ThemeDto {
     @Size(max = 30)
     private String name;
 
+    @NotBlank
+    private String description;
+
 }

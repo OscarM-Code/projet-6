@@ -1,0 +1,18 @@
+<app-header></app-header>
+<div class="content">
+    <div class="top">
+        <button class="back-button" (click)="routerHome()">←</button>
+    </div>
+    <h1>Créer un nouveau post</h1>
+    <form (submit)="createPost()">
+        <input type="text" id="title" name="title" [(ngModel)]="post.title" required placeholder="Titre">
+
+        <textarea id="content" name="content" [(ngModel)]="post.content" required placeholder="Contenu"></textarea>
+
+        <select id="themeId" name="themeId" [(ngModel)]="post.themeId" required>
+            <option *ngFor="let theme of themes" [value]="theme.id">{{ theme.name }}</option>
+        </select>
+
+        <button type="submit">Créer le post</button>
+    </form>
+</div>

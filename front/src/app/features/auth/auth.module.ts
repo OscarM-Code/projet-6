@@ -9,6 +9,7 @@ import { MatButtonModule } from '@angular/material/button';
 import { MatInputModule } from '@angular/material/input';
 import { FormsModule, ReactiveFormsModule } from '@angular/forms';
 import { MatIconModule } from '@angular/material/icon';
+import { HeaderModule } from '../../header/header.module';
 
 const materialModules = [
   MatButtonModule,
@@ -25,6 +26,7 @@ const materialModules = [
     CommonModule,
     FormsModule,
     ReactiveFormsModule,
+    HeaderModule,
     ...materialModules,
   ],
 })

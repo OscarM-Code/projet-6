@@ -1,0 +1,28 @@
+<app-header></app-header>
+<div *ngIf="post" class="post-container">
+    <h1>{{ post.title }}</h1>
+    <div class="post-info">
+        <p>{{ post.user?.username }}</p>
+        <p>{{ formatDate(post.createdAt) }}</p>
+        <p>{{ getThemeLabel(post.themeId) }}</p>
+    </div>
+    <p class="post-content">{{ post.content }}</p> <!-- Contenu du post -->
+    <div class="separation"></div>
+    <div>
+        <h2>Commentaires</h2>
+        <div *ngFor="let com of commentaries" class="comment">
+            <div class="comment-bubble">
+                <p class="comment-username">{{ com.user?.username }}</p>
+                <p class="comment-text">{{ com.content }}</p>
+            </div>
+        </div>
+        <form (ngSubmit)="createCommentary()" class="comment-form">
+            <div class="form-group">
+                <textarea type="content" id="content" [(ngModel)]="newCommentary.content" name="content"
+                    placeholder="Écrivez ici votre commentaire" required></textarea>
+            </div>
+            <button type="submit"><img src="./assets/icon_send.png" alt=""></button>
+        </form>
+    </div>
+</div>
+<div *ngIf="!post">Une erreur est survenue pour l'affichage de cet article.</div>
